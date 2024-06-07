@@ -35,7 +35,7 @@ public class UserDAO {
         return user;
     }
 
-    public void findByIdAndDelete(UUID id) {
+    public User findByIdAndDelete(UUID id) {
         try {
             EntityTransaction t = em.getTransaction();
             User found = em.find(User.class, id);
@@ -44,11 +44,12 @@ public class UserDAO {
                 em.remove(found);
                 t.commit();
                 System.out.println("----------The user with id: " + id + " has been removed");
+                return found;
             } else System.out.println("----------The user has not been found");
-
-
+            return null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 }

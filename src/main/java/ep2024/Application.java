@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Application {
     public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u4-w3-d5");
@@ -25,11 +26,14 @@ public class Application {
 //        for (Catalogue catalogue : libraryCatalogue) {
 //            cd.save(catalogue);
 //        }
+        Catalogue foundBook = cd.findById(UUID.fromString("175d1145-9dd0-40b9-8a2e-8fbc406148a5"));
+        System.out.println(foundBook);
+        Catalogue deleteBook = cd.findByIdAndDelete(UUID.fromString("679e0d0d-a0b2-4218-80ab-6c7538dec3d7"));
 
         List<User> users = ElementFactory.generateUsers();
-        for (User user : users) {
-            ud.save(user);
-        }
+//        for (User user : users) {
+//            ud.save(user);
+//        }
 
 //        Loan loan1 = new Loan();
 //        loan1.setUser(users.get(0));
@@ -38,6 +42,5 @@ public class Application {
 //        loan1.setItems();
 
 
-        System.out.println("Hello World!");
     }
 }

@@ -34,7 +34,7 @@ public class LoanDAO {
         return loan;
     }
 
-    public void findByIdAndDelete(UUID id) {
+    public Loan findByIdAndDelete(UUID id) {
         try {
             EntityTransaction t = em.getTransaction();
             Loan found = em.find(Loan.class, id);
@@ -43,11 +43,12 @@ public class LoanDAO {
                 em.remove(found);
                 t.commit();
                 System.out.println("----------The loan with id: " + id + " has been removed");
+                return found;
             } else System.out.println("----------The loan has not been found");
-
-
+            return null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 }

@@ -35,7 +35,7 @@ public class CatalogueDAO {
         return catalogue;
     }
 
-    public void findByIdAndDelete(UUID id) {
+    public Catalogue findByIdAndDelete(UUID id) {
         try {
             EntityTransaction t = em.getTransaction();
             Catalogue found = em.find(Catalogue.class, id);
@@ -44,11 +44,12 @@ public class CatalogueDAO {
                 em.remove(found);
                 t.commit();
                 System.out.println("----------The item with id: " + id + " has been removed");
-            } else System.out.println("----------The item has not been found");
-
-
+                return found;
+            } else System.out.println("----------The item with id: " + id + " has not been found");
+            return null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
