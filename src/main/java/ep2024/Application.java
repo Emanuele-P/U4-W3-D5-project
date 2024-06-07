@@ -3,7 +3,10 @@ package ep2024;
 import ep2024.dao.CatalogueDAO;
 import ep2024.dao.LoanDAO;
 import ep2024.dao.UserDAO;
-import ep2024.entities.*;
+import ep2024.entities.Catalogue;
+import ep2024.entities.ElementFactory;
+import ep2024.entities.Loan;
+import ep2024.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -42,8 +45,8 @@ public class Application {
         System.out.println("Catalogue items published in " + year + ":");
         findByYear.forEach(System.out::println);
 
-        String author = "Isa";
-        List<Book> findByAuthor = cd.findByAuthor(author);
+        String author = "Isa Kemmer";
+        List<Catalogue> findByAuthor = cd.findByAuthor(author);
         System.out.println("Catalogue items from author {" + author + "}:");
         findByAuthor.forEach(System.out::println);
 

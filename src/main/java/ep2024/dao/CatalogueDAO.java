@@ -1,6 +1,5 @@
 package ep2024.dao;
 
-import ep2024.entities.Book;
 import ep2024.entities.Catalogue;
 import ep2024.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
@@ -62,8 +61,8 @@ public class CatalogueDAO {
         return query.getResultList();
     }
 
-    public List<Book> findByAuthor(String author) {
-        TypedQuery<Book> query = em.createNamedQuery("find_by_author", Book.class);
+    public List<Catalogue> findByAuthor(String author) {
+        TypedQuery<Catalogue> query = em.createNamedQuery("find_by_author", Catalogue.class);
         query.setParameter("author", author.toLowerCase());
         return query.getResultList();
     }
