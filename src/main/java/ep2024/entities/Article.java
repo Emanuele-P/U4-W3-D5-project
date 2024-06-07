@@ -1,15 +1,14 @@
 package ep2024.entities;
 
 import ep2024.enums.Release;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "articles")
 public class Article extends Catalogue {
 
     @Column(name = "distribution_frequency")
+    @Enumerated(EnumType.STRING)
     private Release release;
 
     public Article() {

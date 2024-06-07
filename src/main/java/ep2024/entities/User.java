@@ -2,6 +2,7 @@ package ep2024.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "date_of_birth")
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
@@ -25,7 +26,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String dateOfBirth) {
+    public User(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -51,11 +52,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

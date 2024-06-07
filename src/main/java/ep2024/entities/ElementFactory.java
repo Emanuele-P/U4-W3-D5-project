@@ -3,6 +3,8 @@ package ep2024.entities;
 import com.github.javafaker.Faker;
 import ep2024.enums.Release;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,9 @@ public class ElementFactory {
         for (int i = 0; i < 10; i++) {
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String dateOfBirth = faker.date().birthday(18, 85).toString();
+            LocalDate dateOfBirth = faker.date().birthday(18, 90).toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
 
             User user = new User(firstName, lastName, dateOfBirth);
             users.add(user);

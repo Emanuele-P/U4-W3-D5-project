@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "loans")
 public class Loan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,7 +34,15 @@ public class Loan {
     public Loan() {
     }
 
-    public Long getId() {
+    public Loan(User user, List<Catalogue> items, LocalDate loanStartDate, LocalDate expectedReturnDate, LocalDate returnDate) {
+        this.user = user;
+        this.items = items;
+        this.loanStartDate = loanStartDate;
+        this.expectedReturnDate = expectedReturnDate;
+        this.returnDate = returnDate;
+    }
+
+    public UUID getId() {
         return id;
     }
 
