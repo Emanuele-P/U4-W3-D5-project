@@ -11,9 +11,18 @@ public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
-    @Column(name = "loaned_items")
+
+    @ManyToMany
+    @JoinTable(name = "loan_catalogue",
+            joinColumns = @JoinColumn(name = "loan_id"),
+            inverseJoinColumns = @JoinColumn(name = "catalogue_id")
+    )
     private List<Catalogue> items;
+
     @Column(name = "loan_start_date")
     private LocalDate loanStartDate;
     @Column(name = "expected_return_date")

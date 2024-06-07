@@ -2,6 +2,7 @@ package ep2024.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +18,9 @@ public class User {
     private String lastName;
     @Column(name = "date_of_birth")
     private String dateOfBirth;
+
+    @OneToMany(mappedBy = "user")
+    private List<Loan> loans;
 
     public User() {
     }
@@ -53,6 +57,14 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 
     @Override
