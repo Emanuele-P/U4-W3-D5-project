@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,6 +58,12 @@ public class LoanDAO {
     public List<Loan> findLoansByUser(UUID userId) {
         TypedQuery<Loan> query = em.createQuery("SELECT l FROM Loan l WHERE l.user.id = :userId", Loan.class);
         query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    public List<Loan> findExpiredLoans() {
+        TypedQuery<Loan> query = em.createQuery("SELECT l FROM Loan l WHERE l.expectedReturnDate < :currentDate AND l.returnDate IS NULL", Loan.class);
+        query.setParameter("currentDate", LocalDate.now());
         return query.getResultList();
     }
 }

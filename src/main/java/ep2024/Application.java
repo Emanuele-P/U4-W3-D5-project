@@ -57,6 +57,7 @@ public class Application {
         List<Catalogue> loanItems1 = Arrays.asList(e1, e2);
         User user1 = ud.findById(UUID.fromString("20a63ba0-7fbc-4417-8a54-347ecfccbecb"));
         Loan loan1 = new Loan(user1, LocalDate.now(), LocalDate.now().plusDays(30), null, loanItems1);
+//        ld.save(loan1);
 
         UUID membershipNumber = UUID.fromString("20a63ba0-7fbc-4417-8a54-347ecfccbecb");
         User user = ud.findById(membershipNumber);
@@ -70,6 +71,21 @@ public class Application {
         } else {
             System.out.println("User with membership number " + membershipNumber + " not found.");
         }
-        
+
+        Catalogue e3 = cd.findById(UUID.fromString("7c52f459-d650-495e-819e-50375aadaf26"));
+        Catalogue e4 = cd.findById(UUID.fromString("fceef0c2-ba29-4a08-9d84-af723fefd95b"));
+        List<Catalogue> loanItems2 = Arrays.asList(e3, e4);
+        User user2 = ud.findById(UUID.fromString("d06ebec4-35d7-42cf-a238-89b125081b2c"));
+        Loan loan2 = new Loan(user2, LocalDate.now().minusDays(40), LocalDate.now().minusDays(10), null, loanItems2);
+//        ld.save(loan2);
+
+        List<Loan> expiredLoans = ld.findExpiredLoans();
+        System.out.println("Expired loans:");
+        expiredLoans.forEach(loan -> {
+            System.out.println("Loan ID: " + loan.getId() + ", User: " + loan.getUser().getFirstName() + " " + loan.getUser().getLastName() + ", Expected Return Date: " + loan.getExpectedReturnDate());
+        });
+
+        em.close();
+        emf.close();
     }
 }
