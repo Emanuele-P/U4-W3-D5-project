@@ -7,6 +7,7 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "catalogue")
+@NamedQuery(name = "find_by_publication_year", query = "SELECT i FROM Catalogue i WHERE i.year = :year")
 public class Catalogue {
     @Id
     @GeneratedValue

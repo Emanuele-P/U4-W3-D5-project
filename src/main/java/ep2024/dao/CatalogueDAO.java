@@ -1,10 +1,13 @@
 package ep2024.dao;
 
+import ep2024.entities.Book;
 import ep2024.entities.Catalogue;
 import ep2024.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CatalogueDAO {
@@ -51,6 +54,18 @@ public class CatalogueDAO {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public List<Catalogue> findByPublicationYear(int year) {
+        TypedQuery<Catalogue> query = em.createNamedQuery("find_by_publication_year", Catalogue.class);
+        query.setParameter("year", year);
+        return query.getResultList();
+    }
+
+    public List<Book> findByAuthor(String author) {
+        TypedQuery<Book> query = em.createNamedQuery("find_by_author", Book.class);
+        query.setParameter("author", author.toLowerCase());
+        return query.getResultList();
     }
 
 }

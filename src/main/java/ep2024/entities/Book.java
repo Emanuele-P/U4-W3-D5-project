@@ -1,10 +1,12 @@
 package ep2024.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "books")
+@NamedQuery(name = "find_by_author", query = "SELECT b FROM Book b WHERE LOWER(b.author) = LOWER(:author)")
 public class Book extends Catalogue {
 
     private String author;
