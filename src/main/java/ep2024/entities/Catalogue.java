@@ -8,6 +8,7 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "catalogue")
 @NamedQuery(name = "find_by_publication_year", query = "SELECT i FROM Catalogue i WHERE i.year = :year")
+@NamedQuery(name = "find_by_title", query = "SELECT a FROM Catalogue a WHERE LOWER(a.title) LIKE LOWER(:nTitle)")
 public class Catalogue {
     @Id
     @GeneratedValue

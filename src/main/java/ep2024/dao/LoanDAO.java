@@ -4,7 +4,9 @@ import ep2024.entities.Loan;
 import ep2024.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class LoanDAO {
@@ -50,5 +52,11 @@ public class LoanDAO {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public List<Loan> findLoansByUser(UUID userId) {
+        TypedQuery<Loan> query = em.createQuery("SELECT l FROM Loan l WHERE l.user.id = :userId", Loan.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 }

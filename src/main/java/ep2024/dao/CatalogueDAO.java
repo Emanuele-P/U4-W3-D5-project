@@ -68,4 +68,10 @@ public class CatalogueDAO {
         return query.getResultList();
     }
 
+    public List<Catalogue> findByTitle(String title) {
+        TypedQuery<Catalogue> query = em.createNamedQuery("find_by_title", Catalogue.class);
+        query.setParameter("nTitle", "%" + title.toLowerCase() + "%");
+        return query.getResultList();
+    }
+
 }

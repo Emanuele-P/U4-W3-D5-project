@@ -14,7 +14,7 @@ public class Loan {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToMany
@@ -24,9 +24,9 @@ public class Loan {
     )
     private List<Catalogue> items;
 
-    @Column(name = "loan_start_date")
+    @Column(name = "loan_start_date", nullable = false)
     private LocalDate loanStartDate;
-    @Column(name = "expected_return_date")
+    @Column(name = "expected_return_date", nullable = false)
     private LocalDate expectedReturnDate;
     @Column(name = "return_date")
     private LocalDate returnDate;
@@ -34,12 +34,12 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(User user, List<Catalogue> items, LocalDate loanStartDate, LocalDate expectedReturnDate, LocalDate returnDate) {
+    public Loan(User user, LocalDate loanStartDate, LocalDate expectedReturnDate, LocalDate returnDate, List<Catalogue> items) {
         this.user = user;
-        this.items = items;
         this.loanStartDate = loanStartDate;
         this.expectedReturnDate = expectedReturnDate;
         this.returnDate = returnDate;
+        this.items = items;
     }
 
     public UUID getId() {
@@ -52,14 +52,6 @@ public class Loan {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Catalogue> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Catalogue> items) {
-        this.items = items;
     }
 
     public LocalDate getLoanStartDate() {
@@ -84,6 +76,14 @@ public class Loan {
 
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public List<Catalogue> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Catalogue> items) {
+        this.items = items;
     }
 
     @Override
